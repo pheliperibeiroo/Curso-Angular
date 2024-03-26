@@ -13,12 +13,6 @@ import { ListService } from 'src/app/services/list.service';
 })
 export class ListRenderComponent implements OnInit {
 animals: Animal[] = [];
-products = [
-  {item: "Coleira", class: "Dog | Cat | Horse" , color: "Amarelo e Azul"},
-  {item: "Gravata", class: "Dog | Cat " , color: "Vermelho e Verde"},
-  {item: "Brilho", class: " Cat | Horse" , color: "Rosa e Roxo"},
-  {item: "Coleira com Pingente", class: "Dog | Cat | Horse" , color: "Todas as cores"},
-]
 
 
 animalDetails = '';
@@ -34,8 +28,8 @@ this.animalDetails = `O pet ${animal.name} tem ${animal.age} anos!`
 }
 
 removeAnimal(animal: Animal){
-  console.log("Removendo animal...");
- this.animals = this.listService.remove(this.animals, animal);
+  this.animals = this.animals.filter((a) => animal.name !== a.name );
+ this.listService.remove(animal.id);
 }
 getAnimals(): void {
   this.listService.getAll().subscribe((animals) => (this.animals = animals));
